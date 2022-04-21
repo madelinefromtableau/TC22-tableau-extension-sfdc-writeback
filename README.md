@@ -27,44 +27,44 @@ The dashboard extension is really just a web app that gets embedded into your Ta
 
 1. Login to your Github account, and search for the takashibinns/tableau-extension-salesforce-writeback repo.  Click on the Fork button to create your own copy of this repository.  
 
-![https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic2.png?raw=true]
+!(https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic2.png?raw=true)
 
 2.  Login to your Heroku Account and create a new app.  
 
-![https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic3.png?raw=true]
+!(https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic3.png?raw=true)
 
 You’ll need to give it a name, so pick something unique to yourself.
 
-![https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic4.png?raw=true]
+!(https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic4.png?raw=true)
 
 The next step is to connect this Heroku app to your Github repository.  Set the deployment method to Github and then click the button to connect to Github.  You will get prompted to login to your Github account.
 
-![https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic6.png?raw=true]
+!(https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic6.png?raw=true)
 
 Use the search box to find your forked repo, and click Connect.
 
-![https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic7.png?raw=true]
+!(https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic7.png?raw=true)
 
 You will be prompted to specify which branch to deploy from, just select Master and then click on the Deploy Branch button.
 
-![https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic8.png?raw=true]
+!(https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic8.png?raw=true)
 
 This process will take a few minutes, but you can see the log output showing its progress.  If all goes well, you should see a message stating that the Deploy to Heroku step was successful.  
 
 If you click the View button it will open the web app in another browser tab.  This will display just a small blue Save button, and you can note the URL for accessing your dashboard extension.  We’ll need this URL later, when editing our .trex file.
 
-![https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic9.png?raw=true]
+!(https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic9.png?raw=true)
 
 ## Create a Connected App in Salesforce
 In order for our dashboard extension to communicate with Salesforce, we need a way for it to authenticate.  In the Salesforce world, that means creating a Connected App.  Think of this as a way to map Salesforce Users to an external application (our dashboard extension) and specify exactly what permissions this external application requires.
 
 1. Login to your Salesforce trial org and switch to the Setup tab.  Use the search bar to search for App Manager and click on the button for New Connected App.
 
-![https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic10.png?raw=true]
+!(https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic10.png?raw=true)
 
 Give your connected app a name, contact email, and check the box to Enable OAuth Settings.  This will show more options, so enter a callback url (https://www.salesforce.com) and add the Manage User Data via APIs scope.  After clicking save the new connected app should be ready in ~10 minutes.
 
-![https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic11.png?raw=true]
+!(https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic11.png?raw=true)
 
 2. Now you have a connected app, but no users are actually allowed to use it.  We want to configure it, so that a salesforce user can authenticate from our dashboard extension and leverage this connected app.
 
@@ -72,15 +72,15 @@ First note the Consumer Key and Consumer Secret.  Copy these values, as we’ll 
 
 For now click on the Manage button.
 
-![https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic12.png?raw=true]
+!(https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic12.png?raw=true)
 
 Click on the Edit button and change the OAuth Policies -> Permitted Users setting to Admin approved users are pre-authorized.  You will also need to set the IP Restriction setting to Relax IP Restrictions.  Click the save button to get to the previous page.
 
-![https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic13.png?raw=true]
+!(https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic13.png?raw=true)
 
 Now we can add Salesforce profiles that are allowed to use this connected app.  Click Manage Profiles and check the boxes next to each profile you want to allow.  In this mini-hack we can just use the System Administrator, but in a production environment you’d likely use more limited profiles.
 
-![https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic14.png?raw=true]
+!(https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic14.png?raw=true)
 
 ## Configure the dashboard extension
 
@@ -91,17 +91,17 @@ CONSUMERKEY - Copy and paste from the Connected App’s manage connected apps pa
 CONSUMERSECRET - Copy and paste from the Connected App’s manage connected apps page
 PROFILES - A comma separated list of profile names.  This guide just used System Administrator so you can enter that.
 
-![https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic15.png?raw=true]
+!(https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic15.png?raw=true)
 
 Now we need to re-deploy the application to ensure those Config Vars get picked up.  Go back to the Deploy tab and click the Deploy Branch button again.
 
-![https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic16.png?raw=true]
+!(https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic16.png?raw=true)
 
 2. One of the files downloaded as a prerequisite is named sf-writeback-extension.trex.
 
 Open this file in a text editor, and view its XML.  Find the attribute named '<url>', and replace its value with the URL to your Heroku App.
 
-![https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic17.png?raw=true]
+!(https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic17.png?raw=true)
 
 Save the file, and it’s ready to use in Tableau Desktop.
 
@@ -109,37 +109,37 @@ Save the file, and it’s ready to use in Tableau Desktop.
 
 1. Open the included tableau dashboard (LeadAnalysis.twbx) and make sure you’re on the Leads dashboard.  This is a standard Tableau dashboard that contains data about potential leads that we may want to upload to Salesforce.
 
-![https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic18.png?raw=true]
+!(https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic18.png?raw=true)
 
 2. Drag a new Dashboard Extension object to the dashboard, and click the button for Access Local Extension.  Navigate to your .trex file and select it, in order to add it to your dashboard.
 
-![https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic19.png?raw=true]
+!(https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic19.png?raw=true)
 
 You will see a popup asking to confirm the permissions of the dashboard extension, click the OK button.
 
-![https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic20.png?raw=true]
+!(https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic20.png?raw=true)
   
 3. You should see the blue Save button appear in the dashboard extension.  Next, we need to configure the extension by first authenticating to Salesforce.  Click on the dashboard extension object in your dashboard so that you see the gray border around it and the toolbar.  Click on the toolbar’s carrot icon to view the menu and select Configure.
 
-![https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic21.png?raw=true]
+!(https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic21.png?raw=true)
 
 You should see a prompt to log into Salesforce, so enter your trial org’s username and password then click Login.
 
 After authenticating to Salesforce, you will see 2 dropdown menus.  The first is asking where to find your Tableau data.  Select the Lead Details sheet from the dropdown list (this contains all sheets within your dashboard, and this specific sheet is a hidden table with the lead data).  The second dropdown is asking what Salesforce object to write to.  Select Lead from the list of objects and then go to the Mapping tab.
 
-![https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pica .png?raw=true]
+!(https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic22.png?raw=true)
   
 The Mapping tab lists all the fields available in the Salesforce object, and gives you an option to map it to a field from your Tableau sheet.  The screenshot below shows how the fields in our dataset map to the Lead object’s fields.  You don’t necessarily need to map every field, but objects often have required fields which need to be mapped.  When you’ve made these selections, click the Save button to finish configuration.
 
-![https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic23.png?raw=true]
+!(https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic23.png?raw=true)
 
 ## Verify it works
 
 1. The easiest way to verify this is working, is to try it out! Either click the dashboard extension’s Save button right away to write all 5000 records to Salesforce or filter the dashboard first by interacting with the visualizations below.  Either way, you should see a green toast notification telling you how many records were written to the object.
 
-![https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic24.png?raw=true]
+!(https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic24.png?raw=true)
   
 
 2. Maybe you don’t believe the dashboard extension’s notification? Well if you navigate to Salesforce’s Sales Console app in your browser and find the Lead object.  Make sure your view says All Open Leads and you will see all the leads newly added from Tableau.  This should have a Created Date equal to the current time (in PST) and the Owner field will be the Username you specified when authenticating in the dashboard extension.
  
-![https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic25.png?raw=true]
+!(https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic25.png?raw=true)
