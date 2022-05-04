@@ -87,12 +87,13 @@ Now we can add Salesforce profiles that are allowed to use this connected app.  
 
 ## Configure the dashboard extension
 
-1. In heroku, navigate to your app’s **Settings** tab.  This tab has a section for adding Config Vars (environment variables) for the web app.  Add the following config vars, based on your Salesforce Connected App.
+1. In the downloaded files for the application, navigate to tableau-extension-writeback/src/server/config.js and open in notepad++. This script has a section for adding Config Vars (environment variables) for the web app.  Add the following config vars, based on your Salesforce Connected App.
 
 
 **CONSUMERKEY** - Copy and paste from the Connected App’s manage connected apps page
 **CONSUMERSECRET** - Copy and paste from the Connected App’s manage connected apps page
-**PROFILES** - A comma separated list of profile names.  This guide just used System Administrator so you can enter that.
+**PROFILES** - A comma separated list of profile names.  This guide just used 'System Administrator' so you can enter that. 
+Make sure everything is in quotes! Save your file.
 
 ![herokou_keys](https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic15.png?raw=true)
 
@@ -102,11 +103,11 @@ Now we need to re-deploy the application to ensure those Config Vars get picked 
 
 2. One of the files downloaded as a prerequisite is named **sf-writeback-extension.trex**.
 
-Open this file in a text editor, and view its XML.  Find the attribute named **'\<url\>'**, and replace its value with the URL to your Heroku App.
+Open this file in a text editor, and view its XML.  Find the attribute named **'\<url\>'**, and replace its value with 'http://localhost'. If you were using a VM or a managed service such as Heroku, you would enter the app URL or the IP address here.
 
 ![edit_text_file](https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic17.png?raw=true)
 
-Save the file, and it’s ready to use in Tableau Desktop.
+Save the file, and the extension is ready to use in Tableau Desktop.
 
 ## Add the dashboard extension to your dashboard
 
