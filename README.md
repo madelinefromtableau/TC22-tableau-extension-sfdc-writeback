@@ -61,8 +61,11 @@ The dashboard extension is really just a web app that gets embedded into your Ta
 2. Create a new file name '.env' in the folder that was added to the Labuser (should be named 'tableau-extension-salesforce-writeback' and copy your consumer key and secret to the following environment variables. For the Profiles, you can customize this further if you were to create an API-specific profile, but for today, we can just use 'System Administrator'.
 
 `PORT=8080
+
 CONSUMERKEY=<consumer-key-from-connected-app>
+
 CONSUMERSECRET=<consumer-secret-from-connected-app>
+
 PROFILES="<SalesforceProfile>"`
 
 
