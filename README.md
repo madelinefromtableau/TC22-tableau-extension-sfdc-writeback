@@ -87,27 +87,24 @@ Now we can add Salesforce profiles that are allowed to use this connected app.  
 
 ## Configure the dashboard extension
 
-1. In the downloaded files for the application, navigate to tableau-extension-writeback/src/server/config.js and open in notepad++. This script has a section for adding Config Vars (environment variables) for the web app.  Add the following config vars, based on your Salesforce Connected App.
+The dashboard extension is really just a web app that gets embedded into your Tableau workbook.  There are lots of ways to run web apps these days, but for this mini-hack we can just run the web app locally.
 
+1. Open a terminal window and clone the web app from Github
 
-**CONSUMERKEY** - Copy and paste from the Connected App’s manage connected apps page
-**CONSUMERSECRET** - Copy and paste from the Connected App’s manage connected apps page
-**PROFILES** - A comma separated list of profile names.  This guide just used 'System Administrator' so you can enter that. 
-Make sure everything is in quotes! Save your file.
+`git clone https://github.com/takashibinns/tableau-extension-salesforce-writeback.git`
 
-![herokou_keys](https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic15.png?raw=true)
+2. Create a new file name '.env' in the folder that was added to the Labuser (should be named 'tableau-extension-salesforce-writeback' and copy your consumer key and secret to the following environment variables. For the Profiles, you can customize this further if you were to create an API-specific profile, but for today, we can just use 'System Administrator'.
 
-Now we need to re-deploy the application to ensure those Config Vars get picked up.  Go back to the Deploy tab and click the **Deploy Branch** button again.
+`PORT=8080
+CONSUMERKEY=<consumer-key-from-connected-app>
+CONSUMERSECRET=<consumer-secret-from-connected-app>
+PROFILES="<SalesforceProfile>"`
+  
 
-![deploy_branch_2](https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic16.png?raw=true)
-
-2. One of the files downloaded as a prerequisite is named **sf-writeback-extension.trex**.
-
-Open this file in a text editor, and view its XML.  Find the attribute named **'\<url\>'**, and replace its value with 'http://localhost'. If you were using a VM or a managed service such as Heroku, you would enter the app URL or the IP address here.
-
-![edit_text_file](https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic17.png?raw=true)
-
-Save the file, and the extension is ready to use in Tableau Desktop.
+3. From your terminal run the following command to start up the dashboard extension web app
+npm install
+npm run dev
+You should now see the dashboard extension running in your web browser on port 3000.  It’s just a blue button.
 
 ## Add the dashboard extension to your dashboard
 
