@@ -11,9 +11,7 @@ By the end of this solution, a Tableau user should be able to interact with thei
 
 # Prerequisites
 **Tableau Desktop** - We will need Tableau Desktop installed in order to demonstrate the integration.
-**Heroku Account** – A free trial of Heroku.  Sign up for an account
 **Salesforce Developer edition Org** – A free trial of Salesforce. Sign up for a Developer Edition Org. 
-**Github Account** - A free account in Github.  Sign up for an account.
 **Workshop Files** - Download and unzip the files from this [link](https://tableau.egnyte.com/dl/9KEl5FIRN0/Mini_Hack_Files.zip_).
 
 # Solution
@@ -24,39 +22,6 @@ The solution to this mini-hack is to leverage a dashboard extension to take data
 
 This dashboard extension is an open source project that can be configured to write data to any Salesforce object.  Once it’s been deployed, it will need to be configured so that it knows what Salesforce Object to write data to and what fields are required to do so.
 
-## Deploy the dashboard extension web app
-
-The dashboard extension is really just a web app that gets embedded into your Tableau workbook.  There are lots of ways to run web apps these days, but one of the easiest ways is to leverage Heroku.  If you have the web app code in your github repository, we can seamlessly deploy it straight to heroku without writing any code.
-
-1. Login to your Github account, and search for the **takashibinns/tableau-extension-salesforce-writeback** repo.  Click on the Fork button to create your own copy of this repository.  
-
-![fork](https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic2.png?raw=true)
-
-2.  Login to your Heroku Account and create a new app.  
-
-![create_heroku](https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic3.png?raw=true)
-
-You’ll need to give it a name, so pick something unique to yourself.
-
-![create_app](https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic4.png?raw=true)
-
-The next step is to connect this Heroku app to your Github repository.  Set the deployment method to Github and then click the button to connect to Github.  You will get prompted to login to your Github account.
-
-![connect_github](https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic6.png?raw=true)
-
-Use the search box to find your forked repo, and click Connect.
-
-![fork_repo](https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic7.png?raw=true)
-
-You will be prompted to specify which branch to deploy from, just select **Master** and then click on the **Deploy Branch** button.
-
-![deploy_branch](https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic8.png?raw=true)
-
-This process will take a few minutes, but you can see the log output showing its progress.  If all goes well, you should see a message stating that the Deploy to Heroku step was successful.  
-
-If you click the **View** button it will open the web app in another browser tab.  This will display just a small blue Save button, and you can note the URL for accessing your dashboard extension.  We’ll need this URL later, when editing our .trex file.
-
-![test_extension](https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic9.png?raw=true)
 
 ## Create a Connected App in Salesforce
 In order for our dashboard extension to communicate with Salesforce, we need a way for it to authenticate.  In the Salesforce world, that means creating a Connected App.  Think of this as a way to map Salesforce Users to an external application (our dashboard extension) and specify exactly what permissions this external application requires.
@@ -99,12 +64,16 @@ The dashboard extension is really just a web app that gets embedded into your Ta
 CONSUMERKEY=<consumer-key-from-connected-app>
 CONSUMERSECRET=<consumer-secret-from-connected-app>
 PROFILES="<SalesforceProfile>"`
-  
+
 
 3. From your terminal run the following command to start up the dashboard extension web app
 npm install
 npm run dev
+
 You should now see the dashboard extension running in your web browser on port 3000.  It’s just a blue button.
+
+
+
 
 ## Add the dashboard extension to your dashboard
 
