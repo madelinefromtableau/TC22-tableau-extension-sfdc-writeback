@@ -9,12 +9,19 @@ People often analyze CRM data within Tableau, to easily generate visualizations 
 
 By the end of this solution, a Tableau user should be able to interact with their dashboard to get a specific subset of data (filter, drill, etc) and then click a button to write that dataset to Salesforce.  The included workbook contains mock data for new leads, so it makes sense to write back to the Lead object in Salesforce.  An analyst might get a large list of potential leads and want to use Tableau to narrow down this list and only add leads that meet some specific criteria.
 
-# Prerequisites
-**Tableau Desktop** - We will need Tableau Desktop installed in order to demonstrate the integration.
-**Salesforce Developer edition Org** – A free trial of Salesforce. Sign up for a Developer Edition Org. 
+## Prerequisites
+
+**Tableau Desktop** - We will need Tableau Desktop installed in order to demonstrate the integration. This has already been done for you.
+
+**Salesforce Developer edition Org** – A free trial of Salesforce. [Sign up for a Developer Edition Org](https://developer.salesforce.com/signup) or use your own existing developer org.
+
 **Workshop Files** - Download and unzip the files from this [link](https://tableau.egnyte.com/dl/9KEl5FIRN0/Mini_Hack_Files.zip_).
 
-# Solution
+*Note: If you need to copy-paste text into the VM at any time, use the lightning icon at the top left corner and select 'Type Text' -> 'Type Clipboard Text'.*
+
+![clipboard](https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic28.png?raw=true)
+
+## Solution
 
 The solution to this mini-hack is to leverage a dashboard extension to take data from the tableau workbook and push it to Salesforce. To do this, you will need to configure salesforce, deploy the dashboard extension, and configure the dashboard extension within your Tableau dashboard.
 
@@ -22,6 +29,7 @@ The solution to this mini-hack is to leverage a dashboard extension to take data
 
 This dashboard extension is an open source project that can be configured to write data to any Salesforce object.  Once it’s been deployed, it will need to be configured so that it knows what Salesforce Object to write data to and what fields are required to do so.
 
+===
 
 ## Create a Connected App in Salesforce
 In order for our dashboard extension to communicate with Salesforce, we need a way for it to authenticate.  In the Salesforce world, that means creating a Connected App.  Think of this as a way to map Salesforce Users to an external application (our dashboard extension) and specify exactly what permissions this external application requires.
@@ -49,6 +57,8 @@ Click on the Edit button and change the OAuth Policies -> Permitted Users settin
 Now we can add Salesforce profiles that are allowed to use this connected app.  Click **Manage Profiles** and check the boxes next to each profile you want to allow.  In this mini-hack we can just use the System Administrator, but in a production environment you’d likely use more limited profiles.
 
 ![profiles](https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic14.png?raw=true)
+
+===
 
 ## Configure the dashboard extension
 
@@ -83,6 +93,7 @@ You should now see the dashboard extension running in your web browser on port 3
 
 ![localhost_extension](https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/Screen%20Shot%202022-05-06%20at%209.53.58%20AM.png?raw=true)
 
+===
 
 ## Add the dashboard extension to your dashboard
 
@@ -111,6 +122,8 @@ After authenticating to Salesforce, you will see 2 dropdown menus.  The first is
 The Mapping tab lists all the fields available in the Salesforce object, and gives you an option to map it to a field from your Tableau sheet.  The screenshot below shows how the fields in our dataset map to the Lead object’s fields.  You don’t necessarily need to map every field, but objects often have required fields which need to be mapped.  When you’ve made these selections, click the **Save** button to finish configuration.
 
 ![configure_attributes](https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic23.png?raw=true)
+
+===
 
 ## Verify it works
 
