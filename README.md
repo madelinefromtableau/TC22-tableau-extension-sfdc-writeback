@@ -68,14 +68,20 @@ CONSUMERSECRET=<consumer-secret-from-connected-app>
 
 PROFILES="<SalesforceProfile>"`
 
+![file_named_env](https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic27.png?raw=true)
 
-3. From your terminal run the following command to start up the dashboard extension web app
+
+3. From your terminal, navigate to the 'tableau-extension-salesforce-writeback folder' run the following command to start up the dashboard extension web app
+
+`cd LabUser\tableau-extension-salesforce-writeback
+
 npm install
-npm run dev
+
+npm run dev`
 
 You should now see the dashboard extension running in your web browser on port 3000.  It’s just a blue button.
 
-
+![localhost_extension](https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/Screen%20Shot%202022-05-06%20at%209.53.58%20AM.png?raw=true)
 
 
 ## Add the dashboard extension to your dashboard
