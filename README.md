@@ -61,8 +61,11 @@ The dashboard extension is really just a web app that gets embedded into your Ta
 2. Create a new file name '.env' in the folder that was added to the Labuser (should be named 'tableau-extension-salesforce-writeback' and copy your consumer key and secret to the following environment variables. For the Profiles, you can customize this further if you were to create an API-specific profile, but for today, we can just use 'System Administrator'.
 
 `PORT=8080`
+
 `CONSUMERKEY=<consumer-key-from-connected-app>`
+
 `CONSUMERSECRET=<consumer-secret-from-connected-app>`
+
 `PROFILES="<SalesforceProfile>"`
 
 ![file_named_env](https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic27.png?raw=true)
@@ -71,7 +74,9 @@ The dashboard extension is really just a web app that gets embedded into your Ta
 3. From your terminal, navigate to the 'tableau-extension-salesforce-writeback folder' run the following command to start up the dashboard extension web app
 
 `cd LabUser\tableau-extension-salesforce-writeback`
+
 `npm install`
+
 `npm run dev`
 
 You should now see the dashboard extension running in your web browser on port 3000.  It’s just a blue button.
