@@ -2,7 +2,7 @@
 HOT Session Materials for TC22
 
 Written by Takashi Binns
-
+Edited for TC
 
 # Overview
 People often analyze CRM data within Tableau, to easily generate visualizations and gain insights in their data.  But once you identify a subset of data that you want to work with, how can you take action on that?  By using a Tableau dashboard extension, you can simply click a button and send that dataset to Salesforce for the next part of its journey.
