@@ -13,7 +13,7 @@ By the end of this solution, a Tableau user should be able to interact with thei
 
 **Tableau Desktop** - We will need Tableau Desktop installed in order to demonstrate the integration. This has already been done for you.
 
-**Salesforce Developer edition Org** – A free trial of Salesforce. [Sign up for a Developer Edition Org](https://developer.salesforce.com/signup) or use your own existing developer org.
+**Salesforce Developer edition Org** – A free trial of Salesforce. [Sign up for a Developer Edition Org](https://developer.salesforce.com/signup) or use your own existing developer org. Note that the username does not have to be your real email. Copy your username down somewhere. You will also have to wait to get an email 
 
 **Workshop Files** - Download and unzip the files from this [link](https://tableau.egnyte.com/dl/9KEl5FIRN0/Mini_Hack_Files.zip_).
 
@@ -38,7 +38,7 @@ In order for our dashboard extension to communicate with Salesforce, we need a w
 
 ![salesforce_app_manager](https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic10.png?raw=true)
 
-Give your connected app a name, contact email, and check the box to **Enable OAuth Settings**.  This will show more options, so enter a callback url (https://www.salesforce.com) and add the **Manage User Data via APIs** scope.  After clicking save the new connected app should be ready in ~10 minutes.
+Give your connected app the name 'minihack', contact email (this doesn't have to be real, so we can use the username you created), and check the box to **Enable OAuth Settings**.  This will show more options, so enter a callback url (https://www.salesforce.com) and under 'Available OAuth Scopes', add the **Manage User Data via APIs** scope.  Click 'Save and Continue'. After clicking save the new connected app should be ready in ~10 minutes.
 
 ![app_manager_setup](https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic11.png?raw=true)
 
@@ -50,11 +50,11 @@ For now click on the **Manage** button.
 
 ![manage_connected_apps](https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic12.png?raw=true)
 
-Click on the Edit button and change the OAuth Policies -> Permitted Users setting to **Admin approved users are pre-authorized**.  You will also need to set the IP Restriction setting to **Relax IP Restrictions**.  Click the save button to get to the previous page.
+Click on the **Edit Policies** button and change the OAuth Policies -> Permitted Users setting to **Admin approved users are pre-authorized**.  You will also need to set the IP Restriction setting to **Relax IP Restrictions**.  Click the save button to get to the previous page.
 
 ![dashboard_extension_setup](https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic13.png?raw=true)
 
-Now we can add Salesforce profiles that are allowed to use this connected app.  Click **Manage Profiles** and check the boxes next to each profile you want to allow.  In this mini-hack we can just use the System Administrator, but in a production environment you’d likely use more limited profiles.
+Now we can add Salesforce profiles that are allowed to use this connected app.  Click **Manage Profiles** and check the boxes next to each profile you want to allow.  In this mini-hack we can just use the System Administrator, but in a production environment you’d likely use more limited profiles. After checking the 'System Administrator' option, click save.
 
 ![profiles](https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic14.png?raw=true)
 
@@ -64,11 +64,11 @@ Now we can add Salesforce profiles that are allowed to use this connected app.  
 
 The dashboard extension is really just a web app that gets embedded into your Tableau workbook.  There are lots of ways to run web apps these days, but for this mini-hack we can just run the web app locally.
 
-1. Open a terminal window and clone the web app from Github
+1. Open a terminal window by clicking the windows button and typing cmd. Once it opens, clone the web app from Github by typing:
 
 `git clone https://github.com/takashibinns/tableau-extension-salesforce-writeback.git`
 
-2. Create a new file name '.env' in the folder that was added to the Labuser (should be named 'tableau-extension-salesforce-writeback' and copy your consumer key and secret to the following environment variables. For the Profiles, you can customize this further if you were to create an API-specific profile, but for today, we can just use 'System Administrator'.
+2. Once the files are done downloading, navigate to 'Local Disk C:' -> 'Users' -> 'LabUser' -> tableau-extension-salesforce-writeback. Create a new file named '.env' in the folder by right clicking anywhere in the whitespace and select 'New' -> 'Text Cocument' and copy your consumer key and secret to the following environment variables. For the Profiles, you can customize this further if you were to create an API-specific profile, but for today, we can just use 'System Administrator'.
 
 `PORT=8080`
 
@@ -76,20 +76,28 @@ The dashboard extension is really just a web app that gets embedded into your Ta
 
 `CONSUMERSECRET=<consumer-secret-from-connected-app>`
 
-`PROFILES="<SalesforceProfile>"`
+`PROFILES="<Salesforce Profile>"`
+
+SAVE YOUR FILE!
 
 ![file_named_env](https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic27.png?raw=true)
 
 
 3. From your terminal, navigate to the 'tableau-extension-salesforce-writeback folder' run the following command to start up the dashboard extension web app
 
-`cd LabUser\tableau-extension-salesforce-writeback`
+`cd tableau-extension-salesforce-writeback`
+
+Hit enter.
 
 `npm install`
 
+Hit Enter. This will take a few seconds to load. 
+
 `npm run dev`
 
-You should now see the dashboard extension running in your web browser on port 3000.  It’s just a blue button.
+Hit Enter.
+
+You should now see the dashboard extension running in your web browser on port 3000.  It’s just a blue button. Once you see the save button, you can close the window. 
 
 ![localhost_extension](https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/Screen%20Shot%202022-05-06%20at%209.53.58%20AM.png?raw=true)
 
@@ -101,7 +109,7 @@ You should now see the dashboard extension running in your web browser on port 3
 
 ![tab_dashboard](https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic18.png?raw=true)
 
-2. Drag a new Dashboard Extension object to the dashboard, and click the button for **Access Local Extension**.  Navigate to your .trex file and select it, in order to add it to your dashboard.
+2. Find the dashboard extension button in the bottom left corner of your dashboard layout menu. Drag a new Dashboard Extension object to the top right of the dashboard, and click the button for **Access Local Extension**.  Navigate to your .trex file and select it, in order to add it to your dashboard.
 
 ![add_extension_to_dash](https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic19.png?raw=true)
 
@@ -113,7 +121,7 @@ You will see a popup asking to confirm the permissions of the dashboard extensio
 
 ![configure](https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic21.png?raw=true)
 
-You should see a prompt to log into Salesforce, so enter your trial org’s username and password then click **Login**.
+You should see a prompt to log into Salesforce, so enter your trial org’s username (NOT your real email) and password then click **Login**.
 
 After authenticating to Salesforce, you will see 2 dropdown menus.  The first is asking where to find your Tableau data.  Select the **Lead Details** sheet from the dropdown list (this contains all sheets within your dashboard, and this specific sheet is a hidden table with the lead data).  The second dropdown is asking what Salesforce object to write to.  Select **Lead** from the list of objects and then go to the **Mapping** tab.
 
