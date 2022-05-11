@@ -78,9 +78,9 @@ The dashboard extension is really just a web app that gets embedded into your Ta
 
 `PROFILES="<Salesforce Profile>"`
 
-SAVE YOUR FILE!
+**Important:** Save your file as 'all files' NOT a text file. It will show up as a file type ENV if you do this correctly. 
 
-![file_named_env](https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic27.png?raw=true)
+![file_named_env](https://github.com/madelinefromtableau/TC22-tableau-extension-sfdc-writeback/blob/main/pic29.png?raw=true)
 
 
 3. From your terminal, navigate to the 'tableau-extension-salesforce-writeback folder' run the following command to start up the dashboard extension web app
